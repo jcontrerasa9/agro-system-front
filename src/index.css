@@ -1,23 +1,28 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap');
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+:root {
+  --text: #3b3a32;
+  --text-h: #1d1b15;
+  --bg: #f7f4ea;
+  --panel-bg: #fffaf1;
+  --border: #e0d8c7;
+  --code-bg: #efe9db;
+  --accent: #5a7c2c;
+  --accent-bg: rgba(90, 124, 44, 0.15);
+  --accent-border: rgba(90, 124, 44, 0.35);
+  --table-head: #e9e0cb;
+  --input-bg: #fffdf7;
+  --shadow:
+    rgba(70, 63, 48, 0.16) 0 10px 20px -6px,
+    rgba(70, 63, 48, 0.06) 0 6px 10px -6px;
+
+  --sans: 'Fira Sans Condensed', 'Trebuchet MS', sans-serif;
+  --heading: 'Merriweather', 'Palatino Linotype', serif;
+  --mono: 'Cascadia Mono', 'Courier New', monospace;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -30,36 +35,22 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
 body {
   margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(120, 148, 84, 0.2), transparent
+        45%),
+    radial-gradient(circle at 80% 20%, rgba(201, 163, 94, 0.18), transparent
+        40%),
+    var(--bg);
 }
 
 #root {
   width: 1126px;
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
+  text-align: left;
+  border-inline: 1px solid transparent;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -76,10 +67,9 @@ h2 {
 h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
-  margin: 32px 0;
+  margin: 0;
   @media (max-width: 1024px) {
     font-size: 36px;
-    margin: 20px 0;
   }
 }
 h2 {
@@ -95,8 +85,7 @@ p {
   margin: 0;
 }
 
-code,
-.counter {
+code {
   font-family: var(--mono);
   display: inline-flex;
   border-radius: 4px;
