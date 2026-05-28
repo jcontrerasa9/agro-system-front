@@ -134,6 +134,32 @@
   padding: 6px 10px;
 }
 
+.pagination {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text);
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.page-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-controls span {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
 .crop-form {
   display: flex;
   flex-direction: column;

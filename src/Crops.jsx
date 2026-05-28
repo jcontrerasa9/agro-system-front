@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 export default function Crops() {
   const API_BASE = 'http://localhost:8000/api/crops'
+  const PAGE_SIZE = 10
   const [datos, setDatos] = useState([])
+  const [page, setPage] = useState(1)
   const [form, setForm] = useState({
     type: '',
     variety: '',
@@ -48,7 +50,9 @@ export default function Crops() {
           return
         }
 
-        setDatos(Array.isArray(result.data) ? result.data : [])
+        const list = Array.isArray(result.data) ? result.data : []
+        setDatos(list)
+        setPage(1)
       })
       .catch(function () {
         setLoading(false)
@@ -222,6 +226,16 @@ export default function Crops() {
     get_api()
   }, [])
 
+  const totalPages = Math.max(1, Math.ceil(datos.length / PAGE_SIZE))
+  const pageSafe = Math.min(page, totalPages)
+  const startIndex = (pageSafe - 1) * PAGE_SIZE
+  const pageData = datos.slice(startIndex, startIndex + PAGE_SIZE)
+
+  function go_page(nextPage) {
+    const safePage = Math.min(Math.max(nextPage, 1), totalPages)
+    setPage(safePage)
+  }
+
   return (
     <div className="crops">
       <div className="crops-layout">
@@ -249,7 +263,7 @@ export default function Crops() {
                     <td colSpan="5">Sin cultivos registrados</td>
                   </tr>
                 ) : (
-                  datos.map(function (dato) {
+                  pageData.map(function (dato) {
                     return (
                       <tr key={dato.id}>
                         <td>{dato.id}</td>
@@ -288,6 +302,34 @@ export default function Crops() {
                 )}
               </tbody>
             </table>
+          </div>
+          <div className="pagination">
+            <p>
+              Mostrando {pageData.length} de {datos.length} registros
+            </p>
+            <div className="page-controls">
+              <button
+                type="button"
+                onClick={function () {
+                  go_page(pageSafe - 1)
+                }}
+                disabled={pageSafe === 1}
+              >
+                Anterior
+              </button>
+              <span>
+                Pagina {pageSafe} de {totalPages}
+              </span>
+              <button
+                type="button"
+                onClick={function () {
+                  go_page(pageSafe + 1)
+                }}
+                disabled={pageSafe === totalPages}
+              >
+                Siguiente
+              </button>
+            </div>
           </div>
         </div>
 
